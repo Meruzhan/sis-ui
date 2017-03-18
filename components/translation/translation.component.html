@@ -1,0 +1,32 @@
+<!--<my-video-list [videoList]="videos"></my-video-list>-->
+<!--<my-video></my-video>-->
+<!--<router-outlet></router-outlet>-->
+<div class="row row-offcanvas row-offcanvas-right">
+    <!--<my-video-list class="sidebar-offcanvas" id="sidebar" [videoList]="videos"></my-video-list>-->
+    <!--hsd-->
+    <!--<my-video class="col-xs-12 col-sm-9"></my-video>-->
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+    <div *ngIf="videos" class="list-group">
+        <!--<a type="button" #activ (click)="selectVideo()" [routerLink]="videos[0].id" class="list-group-item active ">{{videos[0].name}}</a>-->
+        <a type="button"  *ngFor="let video of videos; let i=index" [class.active]="i == selectedIndex" (click)="selectVideo(i)" class="list-group-item  ">{{video.title}}</a>
+        <!--<a href="#" class="list-group-item">Link</a>-->
+
+    </div>
+</div>
+
+    <!--<router-outlet></router-outlet>-->
+<div *ngIf="selectedVideo"  class="col-xs-12 col-sm-9">
+   {{selectedVideo.title}}
+    <video id="vid" *ngIf="selectedVideo.type=='video'"  width="320" height="240" autoplay>
+        <source src="{{selectedVideo.url}}" type="video/mp4">
+        <!--<source src="{{selectedVideo.url}}.ogg" type="video/ogg">-->
+        Your browser does not support the video tag.
+    </video>
+
+
+    <iframe src="https://www.synisys.com/products/public-investment-management-suite" *ngIf="selectedVideo.type=='html'" width="800" height="500" align="left">
+
+    </iframe>
+
+</div>
+</div>
